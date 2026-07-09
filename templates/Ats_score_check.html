@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Score Check | HireFire AI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
+</head>
+<body>
+    <div class="site-shell">
+        <div class="bg-orb orb-one"></div>
+        <div class="bg-orb orb-two"></div>
+
+        <!-- Navbar -->
+        <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
+            <a href="/" class="brand">
+                <span class="brand-mark">⚡</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                    <span>HireFire AI</span>
+                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Page Header -->
+            <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
+                <h1>Check Your ATS Score</h1>
+                <p>Upload your resume and enter the target job description to analyze alignment and score ATS readiness.</p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="form-container reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 20px;">
+                <div class="form-group">
+                    <label for="resumeFile" class="form-label">Upload Resume (PDF/DOCX)</label>
+                    <input type="file" id="resumeFile" class="form-input" style="padding: 8px 12px;" accept=".pdf,.doc,.docx">
+                </div>
+
+                <div class="form-group">
+                    <label for="jobDesc" class="form-label">Job Description</label>
+                    <textarea id="jobDesc" placeholder="Paste the job description or required skills here..." class="form-textarea"></textarea>
+                </div>
+
+                <button onclick="generateFakeATS()" class="primary-btn w-full mt-4 py-3" style="width: 100%; border: none; cursor: pointer;">
+                    Check ATS Score
+                </button>
+
+                <!-- Status & Results -->
+                <div class="results-container">
+                    <div id="loadingText" class="status-msg hidden">
+                        <div class="spinner"></div>
+                        <p>Analyzing resume alignment... Please wait ⏳</p>
+                    </div>
+                    <div id="result-box" class="hidden text-center" style="margin-top: 24px; padding: 20px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
+                        <p style="color: var(--muted); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Analysis Completed</p>
+                        <p id="result" class="status-msg success"></p>
+                        <p style="color: var(--muted); font-size: 0.85rem; margin-top: 12px;">Your resume matches key terms and formatting rules for this role.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
+            <p><a href="/about/">Know About Us</a></p>
+            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+        </footer>
+    </div>
+
+    <script>
+        function generateFakeATS() {
+            let resumeFile = document.getElementById("resumeFile").files.length;
+            let jobDesc = document.getElementById("jobDesc").value.trim();
+            let loadingText = document.getElementById("loadingText");
+            let resultBox = document.getElementById("result-box");
+            let resultText = document.getElementById("result");
+
+            if (resumeFile === 0 || jobDesc === "") {
+                alert("❌ Please upload a resume file and enter a job description!");
+                return;
+            }
+
+            // Show loading and hide previous result
+            loadingText.classList.remove("hidden");
+            resultBox.classList.add("hidden");
+
+            // Simulate a 3-second delay
+            setTimeout(() => {
+                let fakeScore = Math.floor(Math.random() * 36) + 55; // Generates a score between 55 and 90
+                resultText.innerText = "✅ ATS Score: " + fakeScore + "%";
+                loadingText.classList.add("hidden");
+                resultBox.classList.remove("hidden");
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

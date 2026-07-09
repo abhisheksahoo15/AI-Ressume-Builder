@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder | HireFire AI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
+    <script src="/static/js/create_resume.js"></script>
+</head>
+<body>
+    <div class="site-shell">
+        <div class="bg-orb orb-one"></div>
+        <div class="bg-orb orb-two"></div>
+
+        <!-- Navbar -->
+        <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
+            <a href="/" class="brand">
+                <span class="brand-mark">⚡</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                    <span>HireFire AI</span>
+                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Page Header -->
+            <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
+                <h1>Resume Builder</h1>
+                <p>Fill in your details on the right to dynamically build and download a polished, recruiter-ready resume.</p>
+            </div>
+
+            <!-- Main Work Grid -->
+            <div class="resume-builder-grid reveal visible" style="opacity: 1; transform: translateY(0);">
+                
+                <!-- Left: Resume Canvas Preview (Print Look) -->
+                <div class="resume-preview-panel" id="resume">
+                    <div class="text-3xl font-extrabold text-blue-800 mb-6" id="res-name" style="letter-spacing: -0.02em;">Your Name</div>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider border-b pb-1 mb-2">Contact Information</h3>
+                        <p class="text-gray-700 text-sm mb-1"><strong>Email:</strong> <span id="res-email">Your Email</span></p>
+                        <p class="text-gray-700 text-sm mb-1"><strong>Phone:</strong> <span id="res-phone">Your Phone Number</span></p>
+                        <p class="text-gray-700 text-sm"><strong>LinkedIn:</strong> <span id="res-linkedin">Your LinkedIn</span></p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider border-b pb-1 mb-2">Education</h3>
+                        <p class="text-gray-700 text-sm whitespace-pre-line" id="res-education">Your Education Details</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider border-b pb-1 mb-2">Work Experience</h3>
+                        <p class="text-gray-700 text-sm whitespace-pre-line" id="res-experience">Your Work Experience</p>
+                    </div>
+
+                    <div class="mb-6">
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider border-b pb-1 mb-2">Projects</h3>
+                        <p class="text-gray-700 text-sm whitespace-pre-line" id="res-projects">Your Projects</p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-sm font-bold text-gray-400 uppercase tracking-wider border-b pb-1 mb-2">Certifications</h3>
+                        <p class="text-gray-700 text-sm whitespace-pre-line" id="res-certifications">Your Certifications</p>
+                    </div>
+                </div>
+
+                <!-- Right: Form Input Panel -->
+                <div class="form-container" style="max-width: 100%; margin: 0;">
+                    <h3 style="font-size: 1.4rem; font-weight: 700; color: white; margin-bottom: 20px;">Enter Your Details</h3>
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" id="name" placeholder="E.g., Abhishek Sahoo" class="form-input" oninput="updatePreview()" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" placeholder="E.g., info@domain.com" class="form-input" oninput="updatePreview()" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input type="text" id="phone" placeholder="E.g., +91 98765 43210" class="form-input" oninput="updatePreview()" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="linkedin" class="form-label">LinkedIn Profile URL</label>
+                        <input type="text" id="linkedin" placeholder="E.g., linkedin.com/in/username" class="form-input" oninput="updatePreview()" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="education" class="form-label">Education Details</label>
+                        <textarea id="education" placeholder="E.g., Master of Computer Applications (MCA)&#10;Cambridge Institute of Technology, 2024-2026" class="form-textarea" oninput="updatePreview()"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience" class="form-label">Work Experience</label>
+                        <textarea id="experience" placeholder="E.g., Software Development Intern at Accenture&#10;Worked on full-stack microservices & DevOps pipelines" class="form-textarea" oninput="updatePreview()"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projects" class="form-label">Projects</label>
+                        <textarea id="projects" placeholder="E.g., HireFire AI Resume Builder&#10;FastAPI and Python ML model to analyze ATS scores & fetch jobs" class="form-textarea" oninput="updatePreview()"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="certifications" class="form-label">Certifications</label>
+                        <textarea id="certifications" placeholder="E.g., AWS Certified Developer, DevOps Associate" class="form-textarea" oninput="updatePreview()"></textarea>
+                    </div>
+
+                    <button onclick="downloadPDF()" class="primary-btn w-full mt-4 py-3" style="width: 100%; border: none; cursor: pointer;">
+                        Download PDF Resume
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
+            <p><a href="/about/">Know About Us</a></p>
+            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+        </footer>
+    </div>
+</body>
+</html>

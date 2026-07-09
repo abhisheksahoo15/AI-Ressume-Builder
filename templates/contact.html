@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | HireFire AI</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
+</head>
+<body>
+    <div class="site-shell">
+        <div class="bg-orb orb-one"></div>
+        <div class="bg-orb orb-two"></div>
+
+        <!-- Navbar -->
+        <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
+            <a href="/" class="brand">
+                <span class="brand-mark">⚡</span>
+                <div style="display: flex; flex-direction: column; line-height: 1.2;">
+                    <span>HireFire AI</span>
+                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Page Header -->
+            <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
+                <h1>Contact Us</h1>
+                <p>Have questions? We'd love to hear from you. Reach out to our team using the form below.</p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="form-container reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 20px;">
+                <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your full name" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Your Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email address" class="form-input" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Your Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Type your message here..." class="form-textarea" required></textarea>
+                    </div>
+
+                    <button type="submit" class="primary-btn w-full mt-4 py-3" style="width: 100%; border: none; cursor: pointer;">
+                        Send Message
+                    </button>
+                </form>
+
+                <div class="contact-info" style="margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center;">
+                    <h3 style="font-size: 1.15rem; font-weight: 700; color: white; margin-bottom: 12px;">Get in Touch Directly</h3>
+                    <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 6px;">Email: <a href="mailto:support@hirefireai.cloud" style="color: var(--accent); text-decoration: none;">support@hirefireai.cloud</a></p>
+                    <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 6px;">Phone: +91-9876543210</p>
+                    <p style="color: var(--muted); font-size: 0.95rem;">Location: Bangalore, India</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
+            <p><a href="/about/">Know About Us</a></p>
+            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+        </footer>
+    </div>
+</body>
+</html>
