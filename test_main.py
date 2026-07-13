@@ -16,7 +16,7 @@ def test_home_page():
     """Test if the home page loads successfully."""
     response = client.get("/")
     assert response.status_code == 200
-    assert "Resume Builder" in response.text  # Ensure the expected text is in response
+    assert "CIT Monster Resume X HirefireAI" in response.text  # Ensure the expected text is in response
 
 def test_resume_builder_page():
     """Test if the resume builder page loads successfully."""
@@ -24,17 +24,17 @@ def test_resume_builder_page():
     assert response.status_code == 200
     assert "Resume Builder" in response.text  # Ensure correct page load
 
-# def test_ats_score_page():
-#     """Test if the ATS score check page loads successfully."""
-#     response = client.get("/ats-score-check/")
-#     assert response.status_code == 200
-#     assert "ATS Score Check" in response.text
+def test_ats_score_page():
+    """Test if the ATS score check page loads successfully."""
+    response = client.get("/ats-score-check/")
+    assert response.status_code == 200
+    assert "ATS Score Slayer" in response.text
 
 def test_job_finder_page():
     """Test if the job finder page loads successfully."""
     response = client.get("/job-find/")
     assert response.status_code == 200
-    assert "Job Finder" in response.text
+    assert "Job Hunter" in response.text
 
 def test_health_check():
     """Test if the health check endpoint is running."""

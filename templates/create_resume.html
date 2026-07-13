@@ -3,29 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Builder | HireFire AI</title>
+    <title>Monster Resume Builder 🔥 | CIT Monster Resume X HirefireAI</title>
+    <meta name="description" content="Build a professional resume with CIT Monster Resume X HirefireAI — by Abhishek Sahoo, MCA Dept, Cambridge Institute of Technology.">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
-    <script src="/static/js/create_resume.js"></script>
+    <script src="/static/js/create_resume.js?v=3"></script>
 </head>
 <body>
     <div class="site-shell">
         <div class="bg-orb orb-one"></div>
         <div class="bg-orb orb-two"></div>
 
+        <!-- Sarcasm Ticker -->
+        <div class="sarcasm-ticker">
+            <div class="ticker-inner">
+                <span class="ticker-highlight">"College thinks AI means &quot;Attendance Issue.&quot;" &nbsp;&nbsp;&nbsp;</span>
+                <span class="ticker-highlight">"The only cloud I learned in college was the weather." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
+                <span>🔥 "Learned Cloud Computing on a dry-erase board. Deployed this project on real AWS." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "College thinks Python is a snake. That's why they never taught us." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
+                <span>📝 "College taught us how to write code on paper. I preferred a keyboard." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
+                <span>📚 "Project report: 150 pages. Actual code: 15 pages. Academic perfection." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
+            </div>
+        </div>
         <!-- Navbar -->
         <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
             <a href="/" class="brand">
-                <span class="brand-mark">⚡</span>
+                <span class="brand-mark">👾</span>
                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span>HireFire AI</span>
-                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                    <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:0.05em;">CIT Monster Resume X HirefireAI</span>
+                    <span class="brand-sub">Cambridge Institute of Technology — MCA 🎓 | By Abhishek Sahoo</span>
                 </div>
             </a>
             <div class="nav-links">
@@ -38,8 +52,29 @@
         <main>
             <!-- Page Header -->
             <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
-                <h1>Resume Builder</h1>
-                <p>Fill in your details on the right to dynamically build and download a polished, recruiter-ready resume.</p>
+                <div style="font-size:2.5rem;margin-bottom:10px;">🔥</div>
+                <h1>Monster Resume Builder</h1>
+                <p>Fill in your details and download a recruiter-ready resume with custom themes. 👾</p>
+                <p style="font-size:0.8rem;color:var(--muted);margin-top:8px;">By <strong style="color:var(--accent);">Abhishek Sahoo</strong> | MCA Dept, CIT Bangalore</p>
+            </div>
+
+            <!-- Template Selector -->
+            <div class="form-container reveal visible" style="max-width: 100%; margin-bottom: 24px; text-align: center;">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 12px; font-family:'Fredoka One',cursive;">
+                    👾 Select Your Resume Template Theme
+                </h3>
+                <div class="template-selector-grid">
+                    <button onclick="selectTemplate('default')" class="template-btn active" id="btn-tmpl-default">👾 Monster Cyber</button>
+                    <button onclick="selectTemplate('classic')" class="template-btn" id="btn-tmpl-classic">📄 Classic Light</button>
+                    <button onclick="selectTemplate('dark')" class="template-btn" id="btn-tmpl-dark">🖤 Executive Dark</button>
+                    <button onclick="selectTemplate('orange')" class="template-btn" id="btn-tmpl-orange">🧡 Vibrant Orange</button>
+                    <button onclick="selectTemplate('serif')" class="template-btn" id="btn-tmpl-serif">📜 Elegant Serif</button>
+                    <button onclick="selectTemplate('tech')" class="template-btn" id="btn-tmpl-tech">🤖 Modern Tech</button>
+                    <button onclick="selectTemplate('cyber')" class="template-btn" id="btn-tmpl-cyber">⚡ Cyber Neon</button>
+                    <button onclick="selectTemplate('royal')" class="template-btn" id="btn-tmpl-royal">👑 Royal Blue</button>
+                    <button onclick="selectTemplate('split')" class="template-btn" id="btn-tmpl-split">🎨 Left Sidebar</button>
+                    <button onclick="selectTemplate('nightmare')" class="template-btn" id="btn-tmpl-nightmare">💀 Red Alert Comic</button>
+                </div>
             </div>
 
             <!-- Main Work Grid -->
@@ -128,10 +163,12 @@
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
-            <p><a href="/about/">Know About Us</a></p>
-            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+            <div class="footer-monster">👾</div>
+            <p class="footer-brand">CIT Monster Resume X HirefireAI</p>
+            <p>Made with 🔥 by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
+            <p style="margin-top:6px;">&copy; 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
+            <p style="margin-top:6px;font-size:0.78rem;color:#475569;font-style:italic;">"Final Year MCA Project developed by Abhishek Sahoo."</p>
         </footer>
     </div>
 </body>

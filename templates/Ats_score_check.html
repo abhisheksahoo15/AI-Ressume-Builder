@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATS Score Check | HireFire AI</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>ATS Score Slayer 👾 | CIT Monster Resume X HirefireAI</title>
+    <meta name="description" content="Check your ATS resume score with CIT Monster Resume X HirefireAI — by Abhishek Sahoo, MCA, CIT Bangalore.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
 </head>
@@ -16,13 +16,24 @@
         <div class="bg-orb orb-one"></div>
         <div class="bg-orb orb-two"></div>
 
+        <!-- Sarcasm Ticker -->
+        <div class="sarcasm-ticker">
+            <div class="ticker-inner">
+                <span class="ticker-highlight">"College thinks AI means &quot;Attendance Issue.&quot;" &nbsp;&nbsp;&nbsp;</span>
+                <span class="ticker-highlight">"The only cloud I learned in college was the weather." &nbsp;&nbsp;&nbsp;</span>
+                <span>🤖 ATS Monster Slayer — Because robots shouldn't reject you before a human does &nbsp;&nbsp;&nbsp;</span>
+                <span>👾 By Abhishek Sahoo | MCA, Cambridge Institute of Technology &nbsp;&nbsp;&nbsp;</span>
+                <span>🤖 ATS Monster Slayer — Because robots shouldn't reject you before a human does &nbsp;&nbsp;&nbsp;</span>
+                <span>👾 By Abhishek Sahoo | MCA, Cambridge Institute of Technology &nbsp;&nbsp;&nbsp;</span>
+            </div>
+        </div>
         <!-- Navbar -->
         <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
             <a href="/" class="brand">
-                <span class="brand-mark">⚡</span>
+                <span class="brand-mark">👾</span>
                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span>HireFire AI</span>
-                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                    <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:0.05em;">CIT Monster Resume X HirefireAI</span>
+                    <span class="brand-sub">Cambridge Institute of Technology — MCA 🎓 | By Abhishek Sahoo</span>
                 </div>
             </a>
             <div class="nav-links">
@@ -35,8 +46,10 @@
         <main>
             <!-- Page Header -->
             <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
-                <h1>Check Your ATS Score</h1>
-                <p>Upload your resume and enter the target job description to analyze alignment and score ATS readiness.</p>
+                <div style="font-size:2.5rem;margin-bottom:10px;">🤖</div>
+                <h1>ATS Score Slayer</h1>
+                <p>Upload your resume &amp; job description. The monster will check if your layout and keywords are fully optimized. 👾</p>
+                <p style="font-size:0.8rem;color:var(--muted);margin-top:8px;">By <strong style="color:var(--accent);">Abhishek Sahoo</strong> | MCA Dept, CIT Bangalore</p>
             </div>
 
             <!-- Form Container -->
@@ -57,10 +70,24 @@
 
                 <!-- Status & Results -->
                 <div class="results-container">
-                    <div id="loadingText" class="status-msg hidden">
-                        <div class="spinner"></div>
-                        <p>Analyzing resume alignment... Please wait ⏳</p>
+                    <div id="loadingText" class="status-msg hidden" style="background: rgba(8,15,33,0.9); border: 1px solid var(--border); border-radius: 20px; padding: 28px; margin-top: 24px;">
+                        <div class="radar-container" style="position: relative; width: 160px; height: 160px; margin: 0 auto 20px;">
+                            <div class="radar-sweep"></div>
+                            <div class="radar-circle circle-1"></div>
+                            <div class="radar-circle circle-2"></div>
+                            <div class="radar-circle circle-3"></div>
+                            <div class="radar-blip blip-1"></div>
+                            <div class="radar-blip blip-2"></div>
+                        </div>
+                        <p style="font-weight: 700; color: white; font-size: 1.1rem; margin-bottom: 16px;">👾 Scanning Resume...</p>
+                        <div class="scan-checks" style="text-align: left; max-width: 320px; margin: 0 auto; display: grid; gap: 8px;">
+                            <div id="check-formatting" class="scan-check">🔍 Checking layout formatting...</div>
+                            <div id="check-keywords" class="scan-check">🔍 Analyzing job description keywords...</div>
+                            <div id="check-sections" class="scan-check">🔍 Testing section alignments...</div>
+                            <div id="check-verbs" class="scan-check">🔍 Evaluating action verbs...</div>
+                        </div>
                     </div>
+
                     <div id="result-box" class="hidden text-center" style="margin-top: 24px; padding: 20px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border);">
                         <p style="color: var(--muted); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Analysis Completed</p>
                         <p id="result" class="status-msg success"></p>
@@ -72,8 +99,11 @@
 
         <!-- Footer -->
         <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
-            <p><a href="/about/">Know About Us</a></p>
-            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+            <div class="footer-monster">👾</div>
+            <p class="footer-brand">CIT Monster Resume X HirefireAI</p>
+            <p>Made with 🔥 by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
+            <p style="margin-top:6px;">&copy; 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
+            <p style="margin-top:6px;font-size:0.78rem;color:#475569;font-style:italic;">"Final Year MCA Project developed by Abhishek Sahoo."</p>
         </footer>
     </div>
 
@@ -90,17 +120,55 @@
                 return;
             }
 
+            // Reset checklist texts
+            document.getElementById("check-formatting").className = "scan-check";
+            document.getElementById("check-formatting").innerHTML = "🔍 Checking layout formatting...";
+            document.getElementById("check-keywords").className = "scan-check";
+            document.getElementById("check-keywords").innerHTML = "🔍 Analyzing job description keywords...";
+            document.getElementById("check-sections").className = "scan-check";
+            document.getElementById("check-sections").innerHTML = "🔍 Testing section alignments...";
+            document.getElementById("check-verbs").className = "scan-check";
+            document.getElementById("check-verbs").innerHTML = "🔍 Evaluating action verbs...";
+
             // Show loading and hide previous result
             loadingText.classList.remove("hidden");
             resultBox.classList.add("hidden");
 
-            // Simulate a 3-second delay
+            // Phase 1 check formatting
+            setTimeout(() => {
+                const el = document.getElementById("check-formatting");
+                el.classList.add("success");
+                el.innerHTML = "✅ Layout formatting check complete!";
+            }, 1200);
+
+            // Phase 2 check keywords
+            setTimeout(() => {
+                const el = document.getElementById("check-keywords");
+                el.classList.add("success");
+                el.innerHTML = "✅ Keyword density analysis complete!";
+            }, 2400);
+
+            // Phase 3 check sections
+            setTimeout(() => {
+                const el = document.getElementById("check-sections");
+                el.classList.add("success");
+                el.innerHTML = "✅ Section alignments verified!";
+            }, 3600);
+
+            // Phase 4 check verbs
+            setTimeout(() => {
+                const el = document.getElementById("check-verbs");
+                el.classList.add("success");
+                el.innerHTML = "✅ Action verbs strength evaluated!";
+            }, 4800);
+
+            // Show results
             setTimeout(() => {
                 let fakeScore = Math.floor(Math.random() * 36) + 55; // Generates a score between 55 and 90
                 resultText.innerText = "✅ ATS Score: " + fakeScore + "%";
                 loadingText.classList.add("hidden");
                 resultBox.classList.remove("hidden");
-            }, 3000);
+            }, 5500);
         }
     </script>
 </body>

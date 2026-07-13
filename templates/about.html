@@ -3,26 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us | HireFire AI</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <title>About Us | CIT Monster Resume X HirefireAI 👾</title>
+    <meta name="description" content="About CIT Monster Resume X HirefireAI — Built by Abhishek Sahoo, MCA Dept, Cambridge Institute of Technology, Bangalore. Because college didn't provide the tools, so we built them.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
 </head>
 <body>
-    <div class="site-shell">
+    <div class="site-shell" id="mainSite" style="display:block;">
         <div class="bg-orb orb-one"></div>
         <div class="bg-orb orb-two"></div>
+
+        <!-- Ticker -->
+        <div class="sarcasm-ticker">
+            <div class="ticker-inner">
+                <span class="ticker-highlight">"College thinks AI means &quot;Attendance Issue.&quot;" &nbsp;&nbsp;&nbsp;</span>
+                <span class="ticker-highlight">"The only cloud I learned in college was the weather." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
+                <span>🔥 "Learned Cloud Computing on a dry-erase board. Deployed this project on real AWS." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "College thinks Python is a snake. That's why they never taught us." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
+                <span>📝 "College taught us how to write code on paper. I preferred a keyboard." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
+                <span>📚 "Project report: 150 pages. Actual code: 15 pages. Academic perfection." &nbsp;&nbsp;&nbsp;</span>
+                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
+            </div>
+        </div>
 
         <!-- Navbar -->
         <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
             <a href="/" class="brand">
-                <span class="brand-mark">⚡</span>
+                <span class="brand-mark">👾</span>
                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span>HireFire AI</span>
-                    <span style="font-size: 0.65rem; color: var(--muted); font-weight: 500; letter-spacing: 0.05em;">Cambridge Institute of Technology (MCA)</span>
+                    <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:0.05em;">CIT Monster Resume X HirefireAI</span>
+                    <span class="brand-sub">Cambridge Institute of Technology — MCA 🎓 | By Abhishek Sahoo</span>
                 </div>
             </a>
             <div class="nav-links">
@@ -35,64 +49,160 @@
         <main>
             <!-- Page Header -->
             <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
-                <h1>About HireFire AI</h1>
-                <p>Empowering careers through intelligence, automation, and academic support.</p>
+                <img src="/static/images/abhishek.png" alt="Abhishek Sahoo" class="about-header-avatar">
+                <h1>About CIT Monster Resume X HirefireAI</h1>
+                <p>The AI-powered career launchpad built by Abhishek Sahoo as an MCA final year project. 👾</p>
             </div>
 
             <!-- About Content Cards -->
             <section class="features-section" style="padding-top: 20px;">
                 <div class="cards-grid">
                     <article class="feature-card reveal visible" style="opacity: 1; transform: translateY(0);">
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 12px;">Our Mission</h3>
-                        <p style="min-height: auto;">To empower job seekers by providing smart, AI-driven resume-building and job-matching services that stand out in modern hiring channels.</p>
+                        <div style="font-size:2rem;margin-bottom:12px;">🎯</div>
+                        <h3>Our Mission</h3>
+                        <p style="min-height: auto;">To empower students with AI-driven resume-building tools that compile a flagship portfolio and simplify the job search process.</p>
                     </article>
 
                     <article class="feature-card reveal visible" style="opacity: 1; transform: translateY(0);">
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 12px;">Why Choose Us?</h3>
-                        <p style="min-height: auto;">We leverage state-of-the-art heuristics and metadata screening to analyze, optimize, and enhance resumes, helping you get noticed faster by top employers.</p>
+                        <div style="font-size:2rem;margin-bottom:12px;">👾</div>
+                        <h3>Why Monster Resumes?</h3>
+                        <p style="min-height: auto;">Because static resumes fail keyword screeners. We leverage real AI, ATS optimization, and data-driven templates to get you noticed faster.</p>
                     </article>
 
                     <article class="feature-card reveal visible" style="opacity: 1; transform: translateY(0);">
-                        <h3 style="font-size: 1.3rem; font-weight: 700; color: white; margin-bottom: 12px;">ATS Intelligence</h3>
-                        <p style="min-height: auto;">Our built-in scoring checks ensure that your resume formats perfectly comply with modern applicant tracking systems (ATS) used by global enterprises.</p>
+                        <div style="font-size:2rem;margin-bottom:12px;">🤖</div>
+                        <h3>ATS Monster Intelligence</h3>
+                        <p style="min-height: auto;">Our built-in ATS scoring model evaluates formatting, density, and layout parameters, ensuring your resume passes standard screeners successfully.</p>
                     </article>
                 </div>
             </section>
 
+            <!-- Sarcastic Timeline -->
+            <section style="margin: 48px 0;">
+                <div class="section-heading" style="text-align:center;margin-bottom:32px;">
+                    <p class="eyebrow">😂 The Origin Story</p>
+                    <h2 style="font-family:'Fredoka One',cursive;">How This Monster Was Born</h2>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-dot dot-purple"></div>
+                        <div class="timeline-card">
+                            <p class="timeline-date">📅 Year 1</p>
+                            <p class="timeline-text">Deep dive into computing theory, algorithms, and logical structures.</p>
+                            <span class="timeline-emoji">😇</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-dot dot-orange"></div>
+                        <div class="timeline-card">
+                            <p class="timeline-date">📅 Year 2-3</p>
+                            <p class="timeline-text">"Theory ready" turned out to be different from building real apps.</p>
+                            <span class="timeline-emoji">😬</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item left">
+                        <div class="timeline-dot dot-green"></div>
+                        <div class="timeline-card">
+                            <p class="timeline-date">📅 Final Year</p>
+                            <p class="timeline-text">Abhishek Sahoo decided to build a practical, automated developer launchpad. 🛠️</p>
+                            <span class="timeline-emoji">😤</span>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item right">
+                        <div class="timeline-dot dot-white"></div>
+                        <div class="timeline-card timeline-card-gradient">
+                            <p class="timeline-date">🚀 Now</p>
+                            <p class="timeline-text">CIT Monster Resume X HirefireAI is live and ready for final year project presentation.</p>
+                            <span class="timeline-emoji">👾</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Team Section -->
-            <section style="margin: 60px 0;">
-                <div class="section-heading text-center" style="text-align: center; margin-bottom: 40px;">
-                    <p class="eyebrow">The Brains Behind the Code</p>
-                    <h2 style="font-size: 2.2rem; font-weight: 700; color: white;">Meet Our Team</h2>
+            <section style="margin: 40px 0;">
+                <div class="section-heading" style="text-align: center; margin-bottom: 40px;">
+                    <p class="eyebrow">🧠 The Brain Behind The Monster</p>
+                    <h2 style="font-family:'Fredoka One',cursive;font-size:2.2rem;color:white;">Meet The Monster Tamer</h2>
                 </div>
 
-                <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-                    <div class="feature-card" style="max-width: 380px; text-align: center; display: flex; flex-direction: column; align-items: center; padding: 32px 24px;">
-                        <img src="/static/images/abhishek.jpg" alt="Abhishek Sahoo" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--accent); object-fit: cover; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);">
-                        <h3 style="font-size: 1.25rem; font-weight: 700; color: white; margin-bottom: 4px;">Abhishek Sahoo</h3>
-                        <p style="color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 12px; min-height: auto;">Project Manager | Product Owner</p>
-                        <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px; min-height: auto;">Leading the vision of HireFire AI and driving innovation in AI-powered resume building, ATS checks, and smart job discovery.</p>
-                        <p style="font-size: 0.8rem; color: #bae6fd; font-weight: 500;"><strong style="color: white;">Expertise:</strong> DevOps, Project Management, CI/CD Pipeline, Machine Learning</p>
+                <div style="display: flex; justify-content: center;">
+                    <div class="creator-card" style="max-width:640px;text-align:center;padding:40px 36px;">
+                        <div class="creator-monster">👾</div>
+                        <div class="creator-info" style="justify-content:center;">
+                            <img src="/static/images/abhishek.png" alt="Abhishek Sahoo" class="creator-avatar">
+                            <div>
+                                <h3 style="font-size:1.5rem;">Abhishek Sahoo</h3>
+                                <p style="color:var(--monster-orange);font-weight:700;margin-bottom:6px;">DevOps &amp; Cloud Labour ☁️🛠️ | Monster Tamer 👾</p>
+                                <p style="color:var(--muted);font-size:0.88rem;">MCA Department<br>Cambridge Institute of Technology, Bangalore</p>
+                                <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+                                    <span style="background:rgba(56,189,248,0.1);color:#7dd3fc;border:1px solid rgba(56,189,248,0.2);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:600;">DevOps</span>
+                                    <span style="background:rgba(14,165,233,0.1);color:#bae6fd;border:1px solid rgba(14,165,233,0.2);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:600;">Cloud Labour ☁️</span>
+                                    <span style="background:rgba(124,58,237,0.1);color:#c4b5fd;border:1px solid rgba(124,58,237,0.2);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:600;">Machine Learning</span>
+                                    <span style="background:rgba(249,115,22,0.1);color:#fdba74;border:1px solid rgba(249,115,22,0.2);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:600;">Full-Stack</span>
+                                    <span style="background:rgba(34,197,94,0.1);color:#86efac;border:1px solid rgba(34,197,94,0.2);padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:600;">CI/CD Pipeline</span>
+                                </div>
+                                <a href="https://www.linkedin.com/in/abhisheksahoo15/" target="_blank" rel="noopener" class="creator-linkedin">LinkedIn: abhisheksahoo15</a>
+                                <div style="display:none;">
+                                </div>
+                            </div>
+                        </div>
+                        <p class="creator-quote" style="margin-top:20px;">
+                            "I built CIT Monster Resume X HirefireAI to bridge the gap between academic theory and practical full-stack capabilities.<br><br>
+                            This project combines modern web services, ML unpickling, dynamic styling systems, and real API integrations. 🔥<br><br>
+                            It is built to demonstrate actual technical competence."
+                            <br><br>
+                            <span style="color:var(--accent);font-style:normal;font-weight:700;">— <a href="https://www.linkedin.com/in/abhisheksahoo15/" target="_blank" rel="noopener" style="color:var(--accent);">Abhishek Sahoo</a> 👾</span>
+                        </p>
                     </div>
                 </div>
             </section>
 
             <!-- Academic Affiliation Section -->
             <section class="affiliation-section reveal visible" style="opacity: 1; transform: translateY(0);">
-                <p class="eyebrow">Academic Context</p>
-                <h2 style="font-size: 2rem; font-weight: 800; color: white; margin-bottom: 4px;">Cambridge Institute of Technology</h2>
-                <p class="institution-sub">Department of Master of Computer Applications (MCA)</p>
+                <div style="font-size:2.5rem;margin-bottom:16px;">🎓</div>
+                <p class="eyebrow">Academic Context (Apparently)</p>
+                <h2 style="font-size: 2rem; font-weight: 800; color: white; margin-bottom: 4px;font-family:'Fredoka One',cursive;">Cambridge Institute of Technology</h2>
+                <p class="institution-sub">Department of Master of Computer Applications (MCA) — Bangalore</p>
                 <p class="affiliation-text">
-                    This project has been developed under the academic oversight and guidelines of the Department of MCA, Cambridge Institute of Technology, Bangalore. Designed as an industry-aligned project, it brings modern web tech, machine learning algorithms, and intelligent integrations together to solve real-world career-building challenges.
+                    This project was developed under the academic oversight of the Department of MCA, Cambridge Institute of Technology, Bangalore.
+                    CIT Monster Resume X HirefireAI represents what happens when a student builds practical software using FastAPI, ML algorithms, and modern frontend frameworks.
+                    <br><br>
+                    <strong style="color:var(--monster-orange);">Built by Abhishek Sahoo. Final Year MCA Project. 👾</strong>
                 </p>
             </section>
         </main>
 
         <!-- Footer -->
         <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
-            <p><a href="/about/">Know About Us</a></p>
-            <p>&copy; 2026 HireFire AI | Department of MCA, Cambridge Institute of Technology</p>
+            <div class="footer-credit">
+                <img src="/static/images/abhishek.png" alt="Abhishek Sahoo" class="footer-credit-avatar">
+                <div class="footer-credit-text">
+                    <p class="footer-brand">CIT Monster Resume X HirefireAI</p>
+                    <p>Made with ❤️ for the entertainment and as the final year project by <strong><a href="https://www.linkedin.com/in/abhisheksahoo15/" target="_blank" rel="noopener">Abhishek Sahoo</a></strong>.</p>
+                    <p class="footer-role">DevOps &amp; Cloud Labour ☁️🛠️ | LinkedIn: <a href="https://www.linkedin.com/in/abhisheksahoo15/" target="_blank" rel="noopener">abhisheksahoo15</a></p>
+                </div>
+            </div>
+            <p style="margin-top:10px;">© 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
         </footer>
     </div>
+
+    <script>
+        // Re-trigger reveals for subpages
+        document.querySelectorAll('.reveal').forEach(el => {
+            if (window.IntersectionObserver) {
+                new IntersectionObserver(([e]) => {
+                    if (e.isIntersecting) { e.target.classList.add('visible'); }
+                }, { threshold: 0.1 }).observe(el);
+            } else {
+                el.classList.add('visible');
+            }
+        });
+    </script>
 </body>
 </html>
