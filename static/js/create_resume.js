@@ -6,10 +6,10 @@
 let currentTemplate = 'default';
 
 function updatePreview() {
-    const name = document.getElementById("name").value || "Abhishek Sahoo";
-    const email = document.getElementById("email").value || "abhishek@example.com";
-    const phone = document.getElementById("phone").value || "+91 98765 43210";
-    const linkedin = document.getElementById("linkedin").value || "linkedin.com/in/abhisheksahoo";
+    const name = document.getElementById("name").value || "YOUR NAME";
+    const email = document.getElementById("email").value || "your.email@example.com";
+    const phone = document.getElementById("phone").value || "(555) 123-4567";
+    const linkedin = document.getElementById("linkedin").value || "linkedin.com/in/username";
     const education = document.getElementById("education").value || "Cambridge Institute of Technology\nMaster of Computer Applications (MCA) | CGPA: 8.5";
     const experience = document.getElementById("experience").value || "DevOps & Software Engineer Intern at TechCorp\nWorked on Docker, CI/CD pipelines, and FastAPI microservices.";
     const projects = document.getElementById("projects").value || "CIT Monster Resume X HirefireAI\nBuilt a ML-driven resume parser and job finder with FastAPI.";
