@@ -6,6 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 import logging
 from urllib.parse import quote_plus
+from resume_agent import analyze_resume, extract_text_from_upload_bytes
 
 # Load the Pretrained ATS Model
 
@@ -84,6 +85,46 @@ async def ats_score_page(request: Request):
     except Exception as e:
         logger.error(f"Error loading ATS score check page: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+@app.post("/resume-agent/analyze/")
+async def resume_agent_analyze(
+    resume_text: str = Form(""),
+    job_description: str = Form(""),
+    career_goal: str = Form(""),
+    resume_file: UploadFile | None = File(None),
+):
+    """Analyze a resume with the deterministic ResumePilot career-agent workflow."""
+    try:
+        uploaded_text = ""
+        upload_note = "No file uploaded."
+
+        if resume_file and resume_file.filename:
+            raw = await resume_file.read()
+            uploaded_text = extract_text_from_upload_bytes(raw, resume_file.filename)
+            upload_note = (
+                "Resume text extracted from uploaded file."
+                if uploaded_text
+                else "Uploaded file received, but text extraction returned Not Found. Paste resume text for best results."
+            )
+
+        final_resume_text = resume_text.strip() or uploaded_text
+        analysis = analyze_resume(
+            resume_text=final_resume_text,
+            job_description=job_description,
+            career_goal=career_goal,
+        )
+        analysis["source_note"] = upload_note
+
+        return {
+            "status": "success",
+            "source_note": upload_note,
+            "analysis": analysis,
+            "analysis_markdown": analysis["analysis_markdown"],
+        }
+    except Exception as e:
+        logger.error(f"Error running ResumePilot agent analysis: {e}")
+        raise HTTPException(status_code=500, detail="Error running ResumePilot agent analysis")
 
 # @app.post("/predict/")
 # async def predict_ats_score(file: UploadFile = File(...)):

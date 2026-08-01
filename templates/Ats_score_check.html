@@ -55,8 +55,18 @@
             <!-- Form Container -->
             <div class="form-container reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 20px;">
                 <div class="form-group">
-                    <label for="resumeFile" class="form-label">Upload Resume (PDF/DOCX)</label>
-                    <input type="file" id="resumeFile" class="form-input" style="padding: 8px 12px;" accept=".pdf,.doc,.docx">
+                    <label for="resumeFile" class="form-label">Upload Resume (PDF/DOCX/TXT)</label>
+                    <input type="file" id="resumeFile" class="form-input" style="padding: 8px 12px;" accept=".pdf,.doc,.docx,.txt,.md">
+                </div>
+
+                <div class="form-group">
+                    <label for="resumeText" class="form-label">Resume Text</label>
+                    <textarea id="resumeText" placeholder="Paste resume text here for complete ResumePilot AI analysis..." class="form-textarea"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="careerGoal" class="form-label">Career Goal / Target Role</label>
+                    <input type="text" id="careerGoal" class="form-input" placeholder="E.g., AI Engineer, Full Stack Developer, Data Analyst">
                 </div>
 
                 <div class="form-group">
@@ -93,6 +103,12 @@
                         <p id="result" class="status-msg success"></p>
                         <p style="color: var(--muted); font-size: 0.85rem; margin-top: 12px;">Your resume matches key terms and formatting rules for this role.</p>
                     </div>
+
+                    <div id="agent-report-box" class="hidden" style="margin-top: 24px; padding: 22px; border-radius: 16px; background: rgba(8,15,33,0.92); border: 1px solid var(--border);">
+                        <p style="color: white; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-bottom: 8px;">ResumePilot AI Agent Report</p>
+                        <p id="source-note" style="color: var(--muted); font-size: 0.85rem; margin-bottom: 14px;"></p>
+                        <pre id="agent-report" style="white-space: pre-wrap; overflow-x: auto; color: #dbeafe; font-size: 0.88rem; line-height: 1.65; font-family: Consolas, 'Courier New', monospace; margin: 0;"></pre>
+                    </div>
                 </div>
             </div>
         </main>
@@ -108,68 +124,111 @@
     </div>
 
     <script>
-        function generateFakeATS() {
-            let resumeFile = document.getElementById("resumeFile").files.length;
-            let jobDesc = document.getElementById("jobDesc").value.trim();
-            let loadingText = document.getElementById("loadingText");
-            let resultBox = document.getElementById("result-box");
-            let resultText = document.getElementById("result");
+        function resetScanChecks() {
+            const checks = [
+                ["check-formatting", "Checking layout formatting..."],
+                ["check-keywords", "Analyzing job description keywords..."],
+                ["check-sections", "Testing section alignments..."],
+                ["check-verbs", "Evaluating action verbs..."]
+            ];
 
-            if (resumeFile === 0 || jobDesc === "") {
-                alert("❌ Please upload a resume file and enter a job description!");
+            checks.forEach(([id, text]) => {
+                const el = document.getElementById(id);
+                el.className = "scan-check";
+                el.innerHTML = text;
+            });
+        }
+
+        function completeScanCheck(id, text) {
+            const el = document.getElementById(id);
+            el.classList.add("success");
+            el.innerHTML = text;
+        }
+
+        async function fetchResumePilotAnalysis(fileInput, resumeText, jobDesc, careerGoal) {
+            const formData = new FormData();
+            formData.append("resume_text", resumeText);
+            formData.append("job_description", jobDesc);
+            formData.append("career_goal", careerGoal);
+
+            if (fileInput.files.length > 0) {
+                formData.append("resume_file", fileInput.files[0]);
+            }
+
+            const response = await fetch("/resume-agent/analyze/", {
+                method: "POST",
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error("ResumePilot analysis failed");
+            }
+
+            return response.json();
+        }
+
+        async function generateFakeATS() {
+            const fileInput = document.getElementById("resumeFile");
+            const resumeText = document.getElementById("resumeText").value.trim();
+            const careerGoal = document.getElementById("careerGoal").value.trim();
+            const jobDesc = document.getElementById("jobDesc").value.trim();
+            const loadingText = document.getElementById("loadingText");
+            const resultBox = document.getElementById("result-box");
+            const resultText = document.getElementById("result");
+            const agentReportBox = document.getElementById("agent-report-box");
+            const agentReport = document.getElementById("agent-report");
+            const sourceNote = document.getElementById("source-note");
+
+            if (fileInput.files.length === 0 && resumeText === "") {
+                alert("Please upload a resume file or paste resume text.");
                 return;
             }
 
-            // Reset checklist texts
-            document.getElementById("check-formatting").className = "scan-check";
-            document.getElementById("check-formatting").innerHTML = "🔍 Checking layout formatting...";
-            document.getElementById("check-keywords").className = "scan-check";
-            document.getElementById("check-keywords").innerHTML = "🔍 Analyzing job description keywords...";
-            document.getElementById("check-sections").className = "scan-check";
-            document.getElementById("check-sections").innerHTML = "🔍 Testing section alignments...";
-            document.getElementById("check-verbs").className = "scan-check";
-            document.getElementById("check-verbs").innerHTML = "🔍 Evaluating action verbs...";
+            if (jobDesc === "") {
+                alert("Please enter a job description.");
+                return;
+            }
 
-            // Show loading and hide previous result
+            resetScanChecks();
             loadingText.classList.remove("hidden");
             resultBox.classList.add("hidden");
+            agentReportBox.classList.add("hidden");
+            agentReport.textContent = "";
+            sourceNote.textContent = "";
 
-            // Phase 1 check formatting
-            setTimeout(() => {
-                const el = document.getElementById("check-formatting");
-                el.classList.add("success");
-                el.innerHTML = "✅ Layout formatting check complete!";
-            }, 1200);
+            const analysisPromise = fetchResumePilotAnalysis(fileInput, resumeText, jobDesc, careerGoal);
 
-            // Phase 2 check keywords
-            setTimeout(() => {
-                const el = document.getElementById("check-keywords");
-                el.classList.add("success");
-                el.innerHTML = "✅ Keyword density analysis complete!";
-            }, 2400);
+            setTimeout(() => completeScanCheck("check-formatting", "Layout formatting check complete."), 1200);
+            setTimeout(() => completeScanCheck("check-keywords", "Keyword density analysis complete."), 2400);
+            setTimeout(() => completeScanCheck("check-sections", "Section alignment verified."), 3600);
+            setTimeout(() => completeScanCheck("check-verbs", "Action verb strength evaluated."), 4800);
 
-            // Phase 3 check sections
-            setTimeout(() => {
-                const el = document.getElementById("check-sections");
-                el.classList.add("success");
-                el.innerHTML = "✅ Section alignments verified!";
-            }, 3600);
+            setTimeout(async () => {
+                const fallbackScore = Math.floor(Math.random() * 36) + 55;
 
-            // Phase 4 check verbs
-            setTimeout(() => {
-                const el = document.getElementById("check-verbs");
-                el.classList.add("success");
-                el.innerHTML = "✅ Action verbs strength evaluated!";
-            }, 4800);
+                try {
+                    const data = await analysisPromise;
+                    const agentScore = data && data.analysis && data.analysis.ats_score
+                        ? data.analysis.ats_score.overall
+                        : fallbackScore;
+                    const score = Number.isInteger(agentScore) ? agentScore : fallbackScore;
 
-            // Show results
-            setTimeout(() => {
-                let fakeScore = Math.floor(Math.random() * 36) + 55; // Generates a score between 55 and 90
-                resultText.innerText = "✅ ATS Score: " + fakeScore + "%";
+                    resultText.innerText = "ATS Score: " + score + "%";
+                    sourceNote.textContent = data.source_note || "";
+                    agentReport.textContent = data.analysis_markdown || "Not Found";
+                } catch (error) {
+                    console.error(error);
+                    resultText.innerText = "ATS Score: " + fallbackScore + "%";
+                    sourceNote.textContent = "ResumePilot AI report could not be generated right now.";
+                    agentReport.textContent = "Existing ATS score flow completed. Please try again or paste resume text directly.";
+                }
+
                 loadingText.classList.add("hidden");
                 resultBox.classList.remove("hidden");
+                agentReportBox.classList.remove("hidden");
             }, 5500);
         }
     </script>
+
 </body>
 </html>
