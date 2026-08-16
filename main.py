@@ -2,6 +2,12 @@ from fastapi import FastAPI, Request, File, UploadFile, Form, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 import os
+import json
+import base64
+import hashlib
+import hmac
+import secrets
+import time
 import requests
 from bs4 import BeautifulSoup
 import logging
@@ -31,6 +37,111 @@ os.makedirs("ml_model", exist_ok=True)
 
 # Load the ATS Score Prediction Model (Bypassed to prevent scikit-learn environment pickling warnings)
 ats_model = "simulation"
+
+ADMIN_USERNAME = os.getenv("HIREFIRE_ADMIN_USERNAME", "Abhi@2003")
+ADMIN_PASSWORD = os.getenv("HIREFIRE_ADMIN_PASSWORD", "Abhi@2003")
+ADMIN_SESSION_SECRET = os.getenv("HIREFIRE_ADMIN_SESSION_SECRET", secrets.token_hex(32))
+ADMIN_SESSION_COOKIE = "hirefire_admin_session"
+ADMIN_SESSION_TTL = 8 * 60 * 60
+
+ADMIN_SETTINGS_PATH = os.path.join("temp", "admin_settings.json")
+DEFAULT_ADMIN_SETTINGS = {
+    "profile": {
+        "name": "",
+        "email": "",
+        "phone": "",
+        "linkedin": "",
+        "education": "",
+        "experience": "",
+        "projects": "",
+        "certifications": "",
+    },
+    "ats": {
+        "target_role": "",
+        "minimum_ats_score": 70,
+        "analysis_temperature": 0.35,
+        "review_notes": "",
+    },
+}
+
+
+def load_admin_settings():
+    """Load the lightweight local admin configuration."""
+    settings = json.loads(json.dumps(DEFAULT_ADMIN_SETTINGS))
+    try:
+        with open(ADMIN_SETTINGS_PATH, "r", encoding="utf-8") as settings_file:
+            saved = json.load(settings_file)
+        for key in settings["profile"]:
+            if isinstance(saved.get("profile", {}).get(key), str):
+                settings["profile"][key] = saved["profile"][key]
+        for key in ("target_role", "review_notes"):
+            if isinstance(saved.get("ats", {}).get(key), str):
+                settings["ats"][key] = saved["ats"][key]
+        if isinstance(saved.get("ats", {}).get("minimum_ats_score"), (int, float)):
+            settings["ats"]["minimum_ats_score"] = max(0, min(100, int(saved["ats"]["minimum_ats_score"])))
+        if isinstance(saved.get("ats", {}).get("analysis_temperature"), (int, float)):
+            settings["ats"]["analysis_temperature"] = round(max(0, min(1, float(saved["ats"]["analysis_temperature"]))), 2)
+    except (FileNotFoundError, json.JSONDecodeError, OSError):
+        pass
+    return settings
+
+
+def save_admin_settings(settings):
+    with open(ADMIN_SETTINGS_PATH, "w", encoding="utf-8") as settings_file:
+        json.dump(settings, settings_file, indent=2)
+
+
+def normalize_admin_settings(payload):
+    settings = load_admin_settings()
+    profile = payload.get("profile", {}) if isinstance(payload, dict) else {}
+    ats = payload.get("ats", {}) if isinstance(payload, dict) else {}
+
+    for key in settings["profile"]:
+        if key in profile:
+            settings["profile"][key] = str(profile[key] or "").strip()
+    for key in ("target_role", "review_notes"):
+        if key in ats:
+            settings["ats"][key] = str(ats[key] or "").strip()
+    try:
+        settings["ats"]["minimum_ats_score"] = max(0, min(100, int(ats.get("minimum_ats_score", settings["ats"]["minimum_ats_score"]))))
+    except (TypeError, ValueError):
+        pass
+    try:
+        settings["ats"]["analysis_temperature"] = round(max(0, min(1, float(ats.get("analysis_temperature", settings["ats"]["analysis_temperature"])))), 2)
+    except (TypeError, ValueError):
+        pass
+    return settings
+
+
+def create_admin_session(username: str) -> str:
+    expires_at = int(time.time()) + ADMIN_SESSION_TTL
+    payload = f"{username}:{expires_at}".encode("utf-8")
+    signature = hmac.new(ADMIN_SESSION_SECRET.encode("utf-8"), payload, hashlib.sha256).hexdigest()
+    encoded_payload = base64.urlsafe_b64encode(payload).decode("ascii").rstrip("=")
+    return f"{encoded_payload}.{signature}"
+
+
+def is_admin_session_valid(session_token: str | None) -> bool:
+    if not session_token or "." not in session_token:
+        return False
+    encoded_payload, signature = session_token.split(".", 1)
+    try:
+        padded_payload = encoded_payload + "=" * (-len(encoded_payload) % 4)
+        payload = base64.urlsafe_b64decode(padded_payload.encode("ascii"))
+        expected_signature = hmac.new(ADMIN_SESSION_SECRET.encode("utf-8"), payload, hashlib.sha256).hexdigest()
+        username, expires_at = payload.decode("utf-8").rsplit(":", 1)
+        return (
+            hmac.compare_digest(signature, expected_signature)
+            and hmac.compare_digest(username, ADMIN_USERNAME)
+            and int(expires_at) > int(time.time())
+        )
+    except (ValueError, TypeError, UnicodeDecodeError, base64.binascii.Error):
+        return False
+
+
+def require_admin(request: Request):
+    if not is_admin_session_valid(request.cookies.get(ADMIN_SESSION_COOKIE)):
+        raise HTTPException(status_code=401, detail="Admin authentication required")
 
 
 @app.get("/")
@@ -87,11 +198,94 @@ async def ats_score_page(request: Request):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
+@app.get("/admin/")
+async def admin_page(request: Request):
+    """Serve the local admin workspace."""
+    try:
+        authenticated = is_admin_session_valid(request.cookies.get(ADMIN_SESSION_COOKIE))
+        return templates.TemplateResponse(
+            request=request,
+            name="admin.html" if authenticated else "admin_login.html",
+            context={"title": "Admin Workspace", "admin_authenticated": authenticated},
+        )
+    except Exception as e:
+        logger.error(f"Error loading admin page: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+@app.post("/api/admin/login/")
+async def admin_login(request: Request, payload: dict):
+    username = str(payload.get("username", ""))
+    password = str(payload.get("password", ""))
+    if not (hmac.compare_digest(username, ADMIN_USERNAME) and hmac.compare_digest(password, ADMIN_PASSWORD)):
+        raise HTTPException(status_code=401, detail="Invalid admin credentials")
+
+    response = {"status": "success", "message": "Admin session started."}
+    from fastapi.responses import JSONResponse
+    json_response = JSONResponse(response)
+    json_response.set_cookie(
+        ADMIN_SESSION_COOKIE,
+        create_admin_session(username),
+        max_age=ADMIN_SESSION_TTL,
+        httponly=True,
+        samesite="lax",
+        secure=False,
+    )
+    return json_response
+
+
+@app.get("/api/admin/session/")
+async def admin_session(request: Request):
+    if not is_admin_session_valid(request.cookies.get(ADMIN_SESSION_COOKIE)):
+        raise HTTPException(status_code=401, detail="Admin authentication required")
+    return {"status": "success", "authenticated": True, "username": ADMIN_USERNAME}
+
+
+@app.post("/api/admin/logout/")
+async def admin_logout():
+    from fastapi.responses import JSONResponse
+    json_response = JSONResponse({"status": "success", "message": "Admin session ended."})
+    json_response.delete_cookie(ADMIN_SESSION_COOKIE)
+    return json_response
+
+
+@app.get("/api/admin/settings/")
+async def get_admin_settings(request: Request):
+    require_admin(request)
+    return {"status": "success", "settings": load_admin_settings()}
+
+
+@app.put("/api/admin/settings/")
+async def update_admin_settings(request: Request, payload: dict):
+    try:
+        require_admin(request)
+        settings = normalize_admin_settings(payload)
+        save_admin_settings(settings)
+        return {"status": "success", "settings": settings}
+    except OSError as e:
+        logger.error(f"Error saving admin settings: {e}")
+        raise HTTPException(status_code=500, detail="Unable to save admin settings")
+
+
+@app.post("/api/admin/reset/")
+async def reset_admin_settings(request: Request):
+    try:
+        require_admin(request)
+        settings = json.loads(json.dumps(DEFAULT_ADMIN_SETTINGS))
+        save_admin_settings(settings)
+        return {"status": "success", "settings": settings}
+    except OSError as e:
+        logger.error(f"Error resetting admin settings: {e}")
+        raise HTTPException(status_code=500, detail="Unable to reset admin settings")
+
+
 @app.post("/resume-agent/analyze/")
 async def resume_agent_analyze(
     resume_text: str = Form(""),
     job_description: str = Form(""),
     career_goal: str = Form(""),
+    analysis_temperature: float | None = Form(None),
+    minimum_ats_score: int | None = Form(None),
     resume_file: UploadFile | None = File(None),
 ):
     """Analyze a resume with the deterministic ResumePilot career-agent workflow."""
@@ -109,11 +303,20 @@ async def resume_agent_analyze(
             )
 
         final_resume_text = resume_text.strip() or uploaded_text
+        saved_ats_settings = load_admin_settings()["ats"]
+        temperature = saved_ats_settings["analysis_temperature"] if analysis_temperature is None else max(0, min(1, float(analysis_temperature)))
+        minimum_score = saved_ats_settings["minimum_ats_score"] if minimum_ats_score is None else max(0, min(100, int(minimum_ats_score)))
         analysis = analyze_resume(
             resume_text=final_resume_text,
             job_description=job_description,
             career_goal=career_goal,
         )
+        analysis["analysis_settings"] = {
+            "analysis_temperature": round(temperature, 2),
+            "minimum_ats_score": minimum_score,
+        }
+        analysis["ats_score"]["target_threshold"] = minimum_score
+        analysis["ats_score"]["threshold_status"] = "On target" if analysis["ats_score"]["overall"] >= minimum_score else "Needs improvement"
         analysis["source_note"] = upload_note
 
         return {
@@ -121,6 +324,7 @@ async def resume_agent_analyze(
             "source_note": upload_note,
             "analysis": analysis,
             "analysis_markdown": analysis["analysis_markdown"],
+            "analysis_settings": analysis["analysis_settings"],
         }
     except Exception as e:
         logger.error(f"Error running ResumePilot agent analysis: {e}")
@@ -302,5 +506,3 @@ async def debug_info():
         "ats_model_loaded": ats_model is not None,
     }
     return {"status": "debug", "data": debug_data}
-
-

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Workspace | HireFire AI</title>
+    <meta name="description" content="Manage HireFire AI resume profile data and ATS analysis preferences.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
+</head>
+<body>
+    <div class="site-shell admin-site-shell">
+        <div class="sarcasm-ticker">
+            <div class="ticker-inner">
+                <span class="ticker-highlight">Admin workspace</span>
+                <span>Resume profile</span>
+                <span>ATS preferences</span>
+                <span>Local configuration</span>
+                <span class="ticker-highlight">Admin workspace</span>
+                <span>Resume profile</span>
+                <span>ATS preferences</span>
+                <span>Local configuration</span>
+            </div>
+        </div>
+
+        <nav class="topbar reveal visible">
+            <a href="/" class="brand">
+                <span class="brand-mark">HF</span>
+                <div class="brand-copy">
+                    <span class="brand-name">HireFire AI</span>
+                    <span class="brand-sub">Admin workspace</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/">Platform</a>
+                <a href="/resume-builder/">Resume builder</a>
+                <a href="/ats-score-check/">ATS analysis</a>
+                <a href="/" class="nav-cta">View platform <span>&rarr;</span></a>
+            </div>
+        </nav>
+
+        <main class="admin-main">
+            <section id="adminLoginCard" class="admin-login-card" hidden>
+                <div class="admin-login-mark">HF</div>
+                <p class="eyebrow">Restricted workspace</p>
+                <h1>Sign in to Admin.</h1>
+                <p>Use your temporary administrator credentials to manage resume profile data and ATS preferences.</p>
+                <form id="adminLoginForm" class="admin-login-form">
+                    <div class="admin-field"><label for="adminUsername">Username</label><input id="adminUsername" type="text" autocomplete="username" placeholder="Enter username" required></div>
+                    <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Enter password" required></div>
+                    <button type="submit" class="primary-btn">Continue to admin</button>
+                </form>
+                <div id="adminLoginStatus" class="admin-feedback" role="status" aria-live="polite"></div>
+                <p class="admin-login-note">Temporary credentials are active for this local workspace. Change them through environment variables before deployment.</p>
+            </section>
+
+            <div id="adminWorkspace">
+            <section class="admin-header reveal visible">
+                <div>
+                    <p class="eyebrow">Control center</p>
+                    <h1>Manage your career workspace.</h1>
+                    <p>Keep your resume profile and ATS analysis preferences ready for every application.</p>
+                </div>
+                <div class="admin-header-actions"><div class="admin-status"><span class="status-dot"></span> Local configuration active</div><button id="adminLogout" type="button" class="admin-logout">Sign out</button></div>
+            </section>
+
+            <div id="adminStatus" class="admin-feedback" role="status" aria-live="polite"></div>
+
+            <form id="adminForm" class="admin-grid">
+                <section class="admin-card admin-profile-card">
+                    <div class="admin-card-heading">
+                        <div><p class="eyebrow">Profile data</p><h2>Resume details</h2></div>
+                        <span class="admin-card-index">01</span>
+                    </div>
+                    <p class="admin-card-description">These details can be used as the starting profile in the resume builder.</p>
+
+                    <div class="admin-form-grid">
+                        <div class="admin-field"><label for="profileName">Full name</label><input id="profileName" name="name" type="text" placeholder="Your full name"></div>
+                        <div class="admin-field"><label for="profileEmail">Email address</label><input id="profileEmail" name="email" type="email" placeholder="you@example.com"></div>
+                        <div class="admin-field"><label for="profilePhone">Phone number</label><input id="profilePhone" name="phone" type="text" placeholder="+91 00000 00000"></div>
+                        <div class="admin-field"><label for="profileLinkedin">LinkedIn profile</label><input id="profileLinkedin" name="linkedin" type="text" placeholder="linkedin.com/in/username"></div>
+                    </div>
+                    <div class="admin-field"><label for="profileEducation">Education</label><textarea id="profileEducation" name="education" placeholder="Degree, institution, graduation year"></textarea></div>
+                    <div class="admin-field"><label for="profileExperience">Experience</label><textarea id="profileExperience" name="experience" placeholder="Role, organization, impact, and responsibilities"></textarea></div>
+                    <div class="admin-field"><label for="profileProjects">Projects</label><textarea id="profileProjects" name="projects" placeholder="Project name, technologies, and measurable outcome"></textarea></div>
+                    <div class="admin-field"><label for="profileCertifications">Certifications</label><textarea id="profileCertifications" name="certifications" placeholder="Certification name and issuing organization"></textarea></div>
+                </section>
+
+                <aside class="admin-side-column">
+                    <section class="admin-card">
+                        <div class="admin-card-heading">
+                            <div><p class="eyebrow">Analysis settings</p><h2>ATS preferences</h2></div>
+                            <span class="admin-card-index">02</span>
+                        </div>
+                        <p class="admin-card-description">Set the baseline used when you review resumes against a target role.</p>
+                        <div class="admin-field"><label for="targetRole">Default target role</label><input id="targetRole" name="target_role" type="text" placeholder="e.g. Full Stack Developer"></div>
+                        <div class="admin-field"><label for="minimumScore">Readiness threshold <span id="minimumScoreValue">70%</span></label><input id="minimumScore" name="minimum_ats_score" type="number" min="0" max="100" step="1" value="70"></div>
+                        <div class="admin-field">
+                            <div class="slider-label-row"><label for="analysisTemperature">Analysis temperature</label><strong id="temperatureValue">0.35</strong></div>
+                            <input id="analysisTemperature" name="analysis_temperature" class="admin-range" type="range" min="0" max="1" step="0.05" value="0.35">
+                            <div class="slider-scale"><span>Focused</span><span>Balanced</span><span>Exploratory</span></div>
+                            <p class="field-help">Use a lower value for consistent, focused guidance. Higher values allow broader suggestions when the analysis engine supports it.</p>
+                        </div>
+                        <div class="admin-field"><label for="reviewNotes">Review notes</label><textarea id="reviewNotes" name="review_notes" placeholder="Optional notes for your ATS workflow"></textarea></div>
+                    </section>
+
+                    <section class="admin-card admin-summary-card">
+                        <p class="eyebrow">Workspace status</p>
+                        <h2>Ready for your next application.</h2>
+                        <div class="admin-summary-row"><span>Profile fields</span><strong id="profileFieldCount">0 / 8</strong></div>
+                        <div class="admin-summary-row"><span>Target role</span><strong id="summaryRole">Not set</strong></div>
+                        <div class="admin-summary-row"><span>ATS threshold</span><strong id="summaryThreshold">70%</strong></div>
+                    </section>
+                </aside>
+
+                <div class="admin-actions">
+                    <button type="submit" class="primary-btn">Save changes</button>
+                    <button type="button" id="resetAdmin" class="secondary-btn">Reset workspace</button>
+                    <a href="/resume-builder/" class="admin-secondary-link">Open resume builder &rarr;</a>
+                </div>
+            </form>
+
+            <p class="admin-security-note"><strong>Deployment note:</strong> This workspace is protected by a temporary local credential. Set <code>HIREFIRE_ADMIN_USERNAME</code>, <code>HIREFIRE_ADMIN_PASSWORD</code>, and <code>HIREFIRE_ADMIN_SESSION_SECRET</code> before public deployment.</p>
+            </div>
+        </main>
+
+        <footer class="footer reveal visible">
+            <div class="footer-monster">HF</div>
+            <p class="footer-brand">HireFire AI</p>
+            <p>Admin workspace for resume and ATS configuration.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/admin.js"></script>
+</body>
+</html>

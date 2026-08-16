@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (welcomeGate && welcomeTypewriter && welcomeEnterBtn) {
         document.body.classList.add("welcome-active");
         welcomeEnterBtn.disabled = false;
-        welcomeEnterBtn.textContent = "Enjoy The Flash";
+        welcomeEnterBtn.textContent = "Enter platform";
         welcomeTypewriter.textContent = "";
 
         const particleColors = ["#f9a8d4", "#c084fc", "#7dd3fc", "#fde68a"];
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        const disclaimerText = "This website is for entertainment and education. Its motto is to showcase technical stuff through sarcasm, student-life jokes, and a little harmless drama. Please take it lightly, enjoy the technical aura, and let the flash land you on the home page.";
+        const disclaimerText = "HireFire AI brings resume creation, ATS analysis, and job discovery into one focused workspace for ambitious professionals.";
         let typedIndex = 0;
         let typingTimer = null;
         let typingDone = false;
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
             welcomeTypewriter.textContent = disclaimerText;
             welcomeGate.classList.add("typing-complete");
             welcomeEnterBtn.disabled = false;
-            welcomeEnterBtn.textContent = "Enjoy The Flash";
+            welcomeEnterBtn.textContent = "Enter platform";
         };
 
         const typeDisclaimer = () => {

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sign In | HireFire AI</title>
+    <meta name="description" content="Secure sign in for the HireFire AI admin workspace.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
+</head>
+<body>
+    <div class="site-shell admin-site-shell">
+        <div class="sarcasm-ticker">
+            <div class="ticker-inner">
+                <span class="ticker-highlight">Protected workspace</span>
+                <span>Resume profile</span>
+                <span>ATS preferences</span>
+                <span>Secure session required</span>
+            </div>
+        </div>
+
+        <nav class="topbar reveal visible">
+            <a href="/" class="brand">
+                <span class="brand-mark">HF</span>
+                <div class="brand-copy">
+                    <span class="brand-name">HireFire AI</span>
+                    <span class="brand-sub">Career intelligence for your next opportunity</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="/">Platform</a>
+                <a href="/resume-builder/">Resume builder</a>
+                <a href="/ats-score-check/">ATS analysis</a>
+            </div>
+        </nav>
+
+        <main class="admin-main">
+            <section class="admin-login-card">
+                <div class="admin-login-mark">HF</div>
+                <p class="eyebrow">Restricted workspace</p>
+                <h1>Sign in to Admin.</h1>
+                <p>Authentication is required before the admin workspace can be opened.</p>
+                <form id="adminLoginForm" class="admin-login-form">
+                    <div class="admin-field"><label for="adminUsername">Username</label><input id="adminUsername" type="text" autocomplete="username" placeholder="Enter username" required></div>
+                    <div class="admin-field"><label for="adminPassword">Password</label><input id="adminPassword" type="password" autocomplete="current-password" placeholder="Enter password" required></div>
+                    <button type="submit" class="primary-btn">Continue to admin</button>
+                </form>
+                <div id="adminLoginStatus" class="admin-feedback" role="status" aria-live="polite"></div>
+                <p class="admin-login-note">Temporary local credentials are shown for this development workspace. Change them before deployment.</p>
+            </section>
+        </main>
+
+        <footer class="footer reveal visible">
+            <div class="footer-monster">HF</div>
+            <p class="footer-brand">HireFire AI</p>
+            <p>Secure admin access.</p>
+        </footer>
+    </div>
+
+    <script src="/static/js/admin-login.js"></script>
+</body>
+</html>

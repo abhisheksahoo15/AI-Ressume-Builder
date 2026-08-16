@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monster Job Hunter 👾 | CIT Monster Resume X HirefireAI</title>
-    <meta name="description" content="Find real engineering jobs with CIT Monster Resume X HirefireAI — by Abhishek Sahoo, MCA, Cambridge Institute of Technology.">
+    <title>Job Discovery | HireFire AI</title>
+    <meta name="description" content="Discover relevant job listings by role and location with HireFire AI.">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
 </head>
@@ -17,85 +17,84 @@
         <div class="bg-orb orb-one"></div>
         <div class="bg-orb orb-two"></div>
 
-        <!-- Sarcasm Ticker -->
         <div class="sarcasm-ticker">
             <div class="ticker-inner">
-                <span class="ticker-highlight">"College thinks AI means &quot;Attendance Issue.&quot;" &nbsp;&nbsp;&nbsp;</span>
-                <span class="ticker-highlight">"The only cloud I learned in college was the weather." &nbsp;&nbsp;&nbsp;</span>
-                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
-                <span>🔥 "Learned Cloud Computing on a dry-erase board. Deployed this project on real AWS." &nbsp;&nbsp;&nbsp;</span>
-                <span>💻 "College thinks Python is a snake. That's why they never taught us." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
-                <span>📝 "College taught us how to write code on paper. I preferred a keyboard." — Abhishek Sahoo &nbsp;&nbsp;&nbsp;</span>
-                <span>📚 "Project report: 150 pages. Actual code: 15 pages. Academic perfection." &nbsp;&nbsp;&nbsp;</span>
-                <span>💻 "Our syllabus: Java 5. This app: FastAPI, ML, CI/CD. Bridging the gap since 2026." &nbsp;&nbsp;&nbsp;</span>
+                <span class="ticker-highlight">Career discovery</span>
+                <span>Role-based search</span>
+                <span>Location-aware results</span>
+                <span>Take the next step with confidence</span>
+                <span class="ticker-highlight">Career discovery</span>
+                <span>Role-based search</span>
+                <span>Location-aware results</span>
+                <span>Take the next step with confidence</span>
             </div>
         </div>
-        <!-- Navbar -->
-        <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
+
+        <nav class="topbar reveal visible">
             <a href="/" class="brand">
-                <span class="brand-mark">👾</span>
-                <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:0.05em;">CIT Monster Resume X HirefireAI</span>
-                    <span class="brand-sub">Cambridge Institute of Technology — MCA 🎓 | By Abhishek Sahoo</span>
+                <span class="brand-mark">HF</span>
+                <div class="brand-copy">
+                    <span class="brand-name">HireFire AI</span>
+                    <span class="brand-sub">Career intelligence for your next opportunity</span>
                 </div>
             </a>
             <div class="nav-links">
                 <a href="/">Home</a>
                 <a href="/about/">About</a>
                 <a href="/contact/">Contact</a>
+                <a href="/admin/">Admin</a>
+                <a href="/resume-builder/" class="nav-cta">Build a resume <span>&rarr;</span></a>
             </div>
         </nav>
 
         <main>
-            <!-- Page Header -->
-            <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
-                <div style="font-size:2.5rem;margin-bottom:10px;">🔎</div>
-                <h1>Monster Job Hunter</h1>
-                <p>Hunt jobs across LinkedIn, Remotive &amp; beyond with automated search algorithms. 👾</p>
-                <p style="font-size:0.8rem;color:var(--muted);margin-top:8px;">By <strong style="color:var(--accent);">Abhishek Sahoo</strong> | MCA Dept, CIT Bangalore</p>
+            <div class="page-header reveal visible">
+                <div class="page-icon">JOB</div>
+                <h1>Job Discovery</h1>
+                <p>Search listings by role and location to find opportunities aligned with your next career move.</p>
+                <p class="page-credit">Built by <strong>Abhishek Sahoo</strong> | MCA, Cambridge Institute of Technology</p>
             </div>
 
-            <!-- Search Form Container -->
-            <div class="form-container reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 20px; max-width: 800px;">
+            <div class="form-container reveal visible job-search-panel">
                 <div class="flex flex-col md:flex-row gap-4">
                     <div class="flex-1 text-left">
-                        <label for="role" class="form-label">Job Role</label>
-                        <input type="text" id="role" placeholder="E.g., Python Developer" class="form-input" />
+                        <label for="role" class="form-label">Job role</label>
+                        <input type="text" id="role" placeholder="e.g. Python Developer" class="form-input" />
                     </div>
                     <div class="flex-1 text-left">
                         <label for="location" class="form-label">Location</label>
-                        <input type="text" id="location" placeholder="E.g., Bangalore" class="form-input" />
+                        <input type="text" id="location" placeholder="e.g. Bangalore" class="form-input" />
                     </div>
                     <div class="flex items-end">
-                        <button onclick="fetchJobs()" class="primary-btn py-3 px-6 h-12 w-full md:w-auto" style="border: none; cursor: pointer; border-radius: 12px;">
-                            Search
-                        </button>
+                        <button onclick="fetchJobs()" class="primary-btn py-3 px-6 h-12 w-full md:w-auto" style="border: none; cursor: pointer; border-radius: 12px;">Search opportunities</button>
                     </div>
                 </div>
 
-                <!-- Spinner -->
                 <div id="loading-spinner" class="hidden" style="margin-top: 24px;">
                     <div class="spinner"></div>
-                    <p class="status-msg">Searching jobs on networks... Please wait ⏳</p>
+                    <p class="status-msg">Searching available listings...</p>
                 </div>
             </div>
 
-            <!-- Results Section -->
-            <div class="results-container reveal visible" style="opacity: 1; transform: translateY(0);">
-                <h3 style="font-size: 1.4rem; font-weight: 700; color: white; border-bottom: 1px solid var(--border); padding-bottom: 8px;">Job Results</h3>
+            <div class="results-container reveal visible">
+                <div class="results-heading">
+                    <div>
+                        <p class="eyebrow">Search results</p>
+                        <h3>Opportunities for your next step</h3>
+                    </div>
+                    <span class="results-note">Updated from connected job sources</span>
+                </div>
                 <div id="job-results" class="job-card-grid">
-                    <p class="status-msg">Enter a job role and location to search listings.</p>
+                    <p class="status-msg">Enter a role and location to search available listings.</p>
                 </div>
             </div>
         </main>
 
-        <!-- Footer -->
-        <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
-            <div class="footer-monster">👾</div>
-            <p class="footer-brand">CIT Monster Resume X HirefireAI</p>
-            <p>Made with 🔥 by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
-            <p style="margin-top:6px;">&copy; 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
-            <p style="margin-top:6px;font-size:0.78rem;color:#475569;font-style:italic;">"Final Year MCA Project developed by Abhishek Sahoo."</p>
+        <footer class="footer reveal visible">
+            <div class="footer-monster">HF</div>
+            <p class="footer-brand">HireFire AI</p>
+            <p>Built by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
+            <p class="footer-meta">&copy; 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
         </footer>
     </div>
 
@@ -107,7 +106,7 @@
         const loadingSpinner = document.getElementById("loading-spinner");
 
         if (!role || !location) {
-          alert("❌ Please enter both job role and location!");
+          alert("Please enter both a job role and location.");
           return;
         }
 
@@ -133,7 +132,7 @@
           displayJobs(data.jobs);
         } catch (error) {
           console.error("Error fetching jobs:", error);
-          jobContainer.innerHTML = "<p class='status-msg error'>Error fetching jobs. Please try again.</p>";
+          jobContainer.innerHTML = "<p class='status-msg error'>We could not load listings right now. Please try again.</p>";
         } finally {
           loadingSpinner.classList.add("hidden");
         }
@@ -144,7 +143,7 @@
         jobContainer.innerHTML = "";
 
         if (!jobs || jobs.length === 0) {
-          jobContainer.innerHTML = "<p class='status-msg'>No jobs found.</p>";
+          jobContainer.innerHTML = "<p class='status-msg'>No matching opportunities were found.</p>";
           return;
         }
 
@@ -155,9 +154,7 @@
                 <h4 class="job-title">${job.title}</h4>
                 <p class="job-company">${job.company}</p>
               </div>
-              <a href="${job.link}" target="_blank" class="job-action-link">
-                Apply Now <span>&rarr;</span>
-              </a>
+              <a href="${job.link}" target="_blank" class="job-action-link">View opportunity <span>&rarr;</span></a>
             </div>
           `;
           jobContainer.innerHTML += jobCard;

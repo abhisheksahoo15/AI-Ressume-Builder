@@ -16,7 +16,7 @@ def test_home_page():
     """Test if the home page loads successfully."""
     response = client.get("/")
     assert response.status_code == 200
-    assert "CIT Monster Resume X HirefireAI" in response.text  # Ensure the expected text is in response
+    assert "HireFire AI" in response.text  # Ensure the platform identity is present
 
 def test_resume_builder_page():
     """Test if the resume builder page loads successfully."""
@@ -28,13 +28,35 @@ def test_ats_score_page():
     """Test if the ATS score check page loads successfully."""
     response = client.get("/ats-score-check/")
     assert response.status_code == 200
-    assert "ATS Score Slayer" in response.text
+    assert "ATS Analysis" in response.text
 
 def test_job_finder_page():
     """Test if the job finder page loads successfully."""
     response = client.get("/job-find/")
     assert response.status_code == 200
-    assert "Job Hunter" in response.text
+    assert "Job Discovery" in response.text
+
+def test_admin_page():
+    """Test if the admin workspace loads successfully."""
+    response = client.get("/admin/")
+    assert response.status_code == 200
+    assert "Sign in to Admin" in response.text
+    assert "analysisTemperature" not in response.text
+
+def test_admin_settings_endpoint():
+    """Test the default admin settings contract."""
+    login = client.post("/api/admin/login/", json={"username": "Abhi@2003", "password": "Abhi@2003"})
+    assert login.status_code == 200
+    admin_panel = client.get("/admin/")
+    assert admin_panel.status_code == 200
+    assert "analysisTemperature" in admin_panel.text
+    response = client.get("/api/admin/settings/")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["status"] == "success"
+    assert "profile" in data["settings"]
+    assert data["settings"]["ats"]["minimum_ats_score"] == 70
+    client.post("/api/admin/logout/")
 
 def test_health_check():
     """Test if the health check endpoint is running."""

@@ -12,11 +12,21 @@ function updatePreview() {
     const linkedin = document.getElementById("linkedin").value || "linkedin.com/in/username";
     const education = document.getElementById("education").value || "Cambridge Institute of Technology\nMaster of Computer Applications (MCA) | CGPA: 8.5";
     const experience = document.getElementById("experience").value || "DevOps & Software Engineer Intern at TechCorp\nWorked on Docker, CI/CD pipelines, and FastAPI microservices.";
-    const projects = document.getElementById("projects").value || "CIT Monster Resume X HirefireAI\nBuilt a ML-driven resume parser and job finder with FastAPI.";
+    const projects = document.getElementById("projects").value || "Career Intelligence Platform\nBuilt a machine-learning resume parser and job discovery workflow with FastAPI.";
     const certifications = document.getElementById("certifications").value || "AWS Certified Solutions Architect\nTensorFlow Developer Certificate";
 
     const resume = document.getElementById("resume");
     if (!resume) return;
+
+    if (currentTemplate === 'default') {
+        applyProfessionalDefaultTemplate();
+        return;
+    }
+
+    if (currentTemplate === 'nightmare') {
+        applyProfessionalRedTemplate();
+        return;
+    }
 
     // Render based on active template structure
     if (currentTemplate === 'default') {
@@ -289,6 +299,14 @@ function updatePreview() {
             </div>
         `;
     }
+
+    if (currentTemplate === 'default') {
+        applyProfessionalDefaultTemplate();
+    }
+
+    if (currentTemplate === 'nightmare') {
+        applyProfessionalRedTemplate();
+    }
 }
 
 function downloadPDF() {
@@ -313,6 +331,14 @@ function selectTemplate(templateName) {
     // Trigger update to redraw custom structure
     updatePreview();
 
+    if (templateName === 'default') {
+        applyProfessionalDefaultTemplate();
+    }
+
+    if (templateName === 'nightmare') {
+        applyProfessionalRedTemplate();
+    }
+
     // Update active button state
     document.querySelectorAll(".template-btn").forEach(btn => {
         btn.classList.remove("active");
@@ -321,7 +347,89 @@ function selectTemplate(templateName) {
     if (activeBtn) activeBtn.classList.add("active");
 }
 
+function applyProfessionalDefaultTemplate() {
+    const resume = document.getElementById("resume");
+    if (!resume) return;
+
+    const value = (id, fallback) => document.getElementById(id).value || fallback;
+    const name = value("name", "YOUR NAME");
+    const email = value("email", "your.email@example.com");
+    const phone = value("phone", "(555) 123-4567");
+    const linkedin = value("linkedin", "linkedin.com/in/username");
+    const education = value("education", "Your education details");
+    const experience = value("experience", "Your work experience");
+    const projects = value("projects", "Your projects");
+    const certifications = value("certifications", "Your certifications");
+
+    resume.style.cssText = "padding: 38px; background: #ffffff; color: #1e293b; border-radius: 14px; font-family: Arial, sans-serif; border-top: 8px solid #2563eb; box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12); min-height: 700px;";
+    resume.innerHTML = `
+        <div style="display: flex; justify-content: space-between; gap: 24px; border-bottom: 1px solid #dbeafe; padding-bottom: 18px; margin-bottom: 24px;">
+            <div><p style="color: #2563eb; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 8px;">Professional profile</p><h1 style="color: #0f172a; font-size: 2.25rem; font-weight: 800; margin: 0;">${name}</h1></div>
+            <p style="color: #64748b; font-size: 0.82rem; line-height: 1.6; text-align: right; margin: 0;">${email}<br>${phone}<br>${linkedin}</p>
+        </div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #2563eb; border-bottom: 1px solid #dbeafe; font-size: 0.92rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Experience</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${experience}</p></div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #2563eb; border-bottom: 1px solid #dbeafe; font-size: 0.92rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Selected projects</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${projects}</p></div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #2563eb; border-bottom: 1px solid #dbeafe; font-size: 0.92rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Education</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${education}</p></div>
+        <div><h3 style="color: #2563eb; border-bottom: 1px solid #dbeafe; font-size: 0.92rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Certifications</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${certifications}</p></div>
+    `;
+}
+
+function applyProfessionalRedTemplate() {
+    const resume = document.getElementById("resume");
+    if (!resume) return;
+
+    const value = (id, fallback) => document.getElementById(id).value || fallback;
+    const name = value("name", "YOUR NAME");
+    const email = value("email", "your.email@example.com");
+    const phone = value("phone", "(555) 123-4567");
+    const linkedin = value("linkedin", "linkedin.com/in/username");
+    const education = value("education", "Your education details");
+    const experience = value("experience", "Your work experience");
+    const projects = value("projects", "Your projects");
+    const certifications = value("certifications", "Your certifications");
+
+    resume.style.cssText = "padding: 34px; background: #fffafa; color: #1f2937; border-radius: 12px; font-family: Arial, sans-serif; border-top: 8px solid #be123c; box-shadow: 0 20px 50px rgba(190, 18, 60, 0.14); min-height: 700px;";
+    resume.innerHTML = `
+        <div style="text-align: left; border-bottom: 1px solid #fecdd3; padding-bottom: 18px; margin-bottom: 24px;">
+            <p style="color: #be123c; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 8px;">Professional profile</p>
+            <h1 style="color: #881337; font-size: 2.2rem; font-weight: 800; margin: 0;">${name}</h1>
+            <p style="color: #64748b; font-size: 0.85rem; margin-top: 8px;">${email} | ${phone} | ${linkedin}</p>
+        </div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #be123c; border-bottom: 1px solid #fecdd3; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Experience</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${experience}</p></div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #be123c; border-bottom: 1px solid #fecdd3; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Selected projects</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${projects}</p></div>
+        <div style="margin-bottom: 18px;"><h3 style="color: #be123c; border-bottom: 1px solid #fecdd3; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Education</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${education}</p></div>
+        <div><h3 style="color: #be123c; border-bottom: 1px solid #fecdd3; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 6px; margin-bottom: 8px;">Certifications</h3><p style="white-space: pre-line; font-size: 0.9rem; line-height: 1.5;">${certifications}</p></div>
+    `;
+}
+
 // Initialize preview on DOM load
 window.addEventListener("DOMContentLoaded", () => {
     updatePreview();
+    loadAdminResumeProfile();
 });
+
+async function loadAdminResumeProfile() {
+    try {
+        const response = await fetch("/api/admin/settings/");
+        if (!response.ok) return;
+        const data = await response.json();
+        const profile = data.settings && data.settings.profile ? data.settings.profile : {};
+        const fields = {
+            name: "name",
+            email: "email",
+            phone: "phone",
+            linkedin: "linkedin",
+            education: "education",
+            experience: "experience",
+            projects: "projects",
+            certifications: "certifications"
+        };
+        Object.entries(fields).forEach(([fieldId, profileKey]) => {
+            const field = document.getElementById(fieldId);
+            if (field && !field.value && profile[profileKey]) field.value = profile[profileKey];
+        });
+        updatePreview();
+    } catch (error) {
+        console.info("Admin resume profile is not available yet.");
+    }
+}

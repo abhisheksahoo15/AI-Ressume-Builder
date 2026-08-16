@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATS Score Slayer 👾 | CIT Monster Resume X HirefireAI</title>
-    <meta name="description" content="Check your ATS resume score with CIT Monster Resume X HirefireAI — by Abhishek Sahoo, MCA, CIT Bangalore.">
+    <title>ATS Analysis | HireFire AI</title>
+    <meta name="description" content="Review resume structure, keywords, and role alignment with HireFire AI ATS analysis.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/index.css">
     <link rel="icon" type="image/png" href="/static/images/Ats.jpg">
 </head>
@@ -16,39 +16,43 @@
         <div class="bg-orb orb-one"></div>
         <div class="bg-orb orb-two"></div>
 
-        <!-- Sarcasm Ticker -->
+        <!-- Platform status strip -->
         <div class="sarcasm-ticker">
             <div class="ticker-inner">
-                <span class="ticker-highlight">"College thinks AI means &quot;Attendance Issue.&quot;" &nbsp;&nbsp;&nbsp;</span>
-                <span class="ticker-highlight">"The only cloud I learned in college was the weather." &nbsp;&nbsp;&nbsp;</span>
-                <span>🤖 ATS Monster Slayer — Because robots shouldn't reject you before a human does &nbsp;&nbsp;&nbsp;</span>
-                <span>👾 By Abhishek Sahoo | MCA, Cambridge Institute of Technology &nbsp;&nbsp;&nbsp;</span>
-                <span>🤖 ATS Monster Slayer — Because robots shouldn't reject you before a human does &nbsp;&nbsp;&nbsp;</span>
-                <span>👾 By Abhishek Sahoo | MCA, Cambridge Institute of Technology &nbsp;&nbsp;&nbsp;</span>
+                <span class="ticker-highlight">ATS alignment review</span>
+                <span>Keyword coverage</span>
+                <span>Structure and formatting checks</span>
+                <span>Actionable improvement guidance</span>
+                <span class="ticker-highlight">ATS alignment review</span>
+                <span>Keyword coverage</span>
+                <span>Structure and formatting checks</span>
+                <span>Actionable improvement guidance</span>
             </div>
         </div>
         <!-- Navbar -->
         <nav class="topbar reveal visible" style="opacity: 1; transform: translateY(0);">
             <a href="/" class="brand">
-                <span class="brand-mark">👾</span>
+                <span class="brand-mark">HF</span>
                 <div style="display: flex; flex-direction: column; line-height: 1.2;">
-                    <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;letter-spacing:0.05em;">CIT Monster Resume X HirefireAI</span>
-                    <span class="brand-sub">Cambridge Institute of Technology — MCA 🎓 | By Abhishek Sahoo</span>
+                    <span class="brand-name">HireFire AI</span>
+                    <span class="brand-sub">Career intelligence for your next opportunity</span>
                 </div>
             </a>
             <div class="nav-links">
                 <a href="/">Home</a>
                 <a href="/about/">About</a>
                 <a href="/contact/">Contact</a>
+                <a href="/admin/">Admin</a>
+                <a href="/resume-builder/" class="nav-cta">Build a resume <span>&rarr;</span></a>
             </div>
         </nav>
 
         <main>
             <!-- Page Header -->
             <div class="page-header reveal visible" style="opacity: 1; transform: translateY(0); margin-top: 40px;">
-                <div style="font-size:2.5rem;margin-bottom:10px;">🤖</div>
-                <h1>ATS Score Slayer</h1>
-                <p>Upload your resume &amp; job description. The monster will check if your layout and keywords are fully optimized. 👾</p>
+                <div class="page-icon">ATS</div>
+                <h1>ATS Analysis</h1>
+                <p>Review your resume against a target role and get practical guidance on structure, keywords, and alignment.</p>
                 <p style="font-size:0.8rem;color:var(--muted);margin-top:8px;">By <strong style="color:var(--accent);">Abhishek Sahoo</strong> | MCA Dept, CIT Bangalore</p>
             </div>
 
@@ -89,12 +93,12 @@
                             <div class="radar-blip blip-1"></div>
                             <div class="radar-blip blip-2"></div>
                         </div>
-                        <p style="font-weight: 700; color: white; font-size: 1.1rem; margin-bottom: 16px;">👾 Scanning Resume...</p>
+                        <p style="font-weight: 700; color: white; font-size: 1.1rem; margin-bottom: 16px;">Analyzing your resume...</p>
                         <div class="scan-checks" style="text-align: left; max-width: 320px; margin: 0 auto; display: grid; gap: 8px;">
-                            <div id="check-formatting" class="scan-check">🔍 Checking layout formatting...</div>
-                            <div id="check-keywords" class="scan-check">🔍 Analyzing job description keywords...</div>
-                            <div id="check-sections" class="scan-check">🔍 Testing section alignments...</div>
-                            <div id="check-verbs" class="scan-check">🔍 Evaluating action verbs...</div>
+                            <div id="check-formatting" class="scan-check">Checking layout formatting...</div>
+                            <div id="check-keywords" class="scan-check">Analyzing job description keywords...</div>
+                            <div id="check-sections" class="scan-check">Testing section alignments...</div>
+                            <div id="check-verbs" class="scan-check">Evaluating action verbs...</div>
                         </div>
                     </div>
 
@@ -102,6 +106,7 @@
                         <p style="color: var(--muted); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 8px;">Analysis Completed</p>
                         <p id="result" class="status-msg success"></p>
                         <p style="color: var(--muted); font-size: 0.85rem; margin-top: 12px;">Your resume matches key terms and formatting rules for this role.</p>
+                        <p id="analysis-settings-note" style="color: var(--muted); font-size: 0.78rem; margin-top: 10px;"></p>
                     </div>
 
                     <div id="agent-report-box" class="hidden" style="margin-top: 24px; padding: 22px; border-radius: 16px; background: rgba(8,15,33,0.92); border: 1px solid var(--border);">
@@ -115,15 +120,21 @@
 
         <!-- Footer -->
         <footer class="footer reveal visible" style="opacity: 1; transform: translateY(0);">
-            <div class="footer-monster">👾</div>
-            <p class="footer-brand">CIT Monster Resume X HirefireAI</p>
-            <p>Made with 🔥 by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
+            <div class="footer-monster">HF</div>
+            <p class="footer-brand">HireFire AI</p>
+            <p>Built by <strong><a href="/about/">Abhishek Sahoo</a></strong></p>
             <p style="margin-top:6px;">&copy; 2026 | Department of MCA, Cambridge Institute of Technology, Bangalore</p>
-            <p style="margin-top:6px;font-size:0.78rem;color:#475569;font-style:italic;">"Final Year MCA Project developed by Abhishek Sahoo."</p>
+            <p style="margin-top:6px;font-size:0.78rem;color:#475569;">Career intelligence for your next opportunity.</p>
         </footer>
     </div>
 
     <script>
+        let adminAtsSettings = {
+            analysis_temperature: 0.35,
+            minimum_ats_score: 70,
+            target_role: ""
+        };
+
         function resetScanChecks() {
             const checks = [
                 ["check-formatting", "Checking layout formatting..."],
@@ -150,6 +161,8 @@
             formData.append("resume_text", resumeText);
             formData.append("job_description", jobDesc);
             formData.append("career_goal", careerGoal);
+            formData.append("analysis_temperature", adminAtsSettings.analysis_temperature);
+            formData.append("minimum_ats_score", adminAtsSettings.minimum_ats_score);
 
             if (fileInput.files.length > 0) {
                 formData.append("resume_file", fileInput.files[0]);
@@ -178,6 +191,7 @@
             const agentReportBox = document.getElementById("agent-report-box");
             const agentReport = document.getElementById("agent-report");
             const sourceNote = document.getElementById("source-note");
+            const analysisSettingsNote = document.getElementById("analysis-settings-note");
 
             if (fileInput.files.length === 0 && resumeText === "") {
                 alert("Please upload a resume file or paste resume text.");
@@ -216,11 +230,14 @@
                     resultText.innerText = "ATS Score: " + score + "%";
                     sourceNote.textContent = data.source_note || "";
                     agentReport.textContent = data.analysis_markdown || "Not Found";
+                    const settings = data.analysis_settings || adminAtsSettings;
+                    analysisSettingsNote.textContent = `Review threshold: ${settings.minimum_ats_score}% • Analysis temperature: ${Number(settings.analysis_temperature).toFixed(2)}`;
                 } catch (error) {
                     console.error(error);
                     resultText.innerText = "ATS Score: " + fallbackScore + "%";
                     sourceNote.textContent = "ResumePilot AI report could not be generated right now.";
                     agentReport.textContent = "Existing ATS score flow completed. Please try again or paste resume text directly.";
+                    analysisSettingsNote.textContent = `Review threshold: ${adminAtsSettings.minimum_ats_score}% • Analysis temperature: ${Number(adminAtsSettings.analysis_temperature).toFixed(2)}`;
                 }
 
                 loadingText.classList.add("hidden");
@@ -228,6 +245,21 @@
                 agentReportBox.classList.remove("hidden");
             }, 5500);
         }
+
+        async function loadAdminAtsSettings() {
+            try {
+                const response = await fetch("/api/admin/settings/");
+                if (!response.ok) return;
+                const data = await response.json();
+                adminAtsSettings = data.settings.ats || adminAtsSettings;
+                const careerGoal = document.getElementById("careerGoal");
+                if (careerGoal && !careerGoal.value) careerGoal.value = adminAtsSettings.target_role || "";
+            } catch (error) {
+                console.info("Admin ATS preferences are not available yet.");
+            }
+        }
+
+        loadAdminAtsSettings();
     </script>
 
 </body>
