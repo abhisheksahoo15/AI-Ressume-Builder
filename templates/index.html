@@ -45,8 +45,32 @@
                 <span><strong>02</strong> ATS analysis</span>
                 <span><strong>03</strong> Job discovery</span>
             </div>
+            <div class="welcome-auth-divider"><span>Optional demo access</span></div>
+            <button class="welcome-google-btn" id="welcomeGoogleBtn" type="button">
+                <span class="google-glyph" aria-hidden="true">G</span>
+                <span id="welcomeGoogleButtonText">Continue with Google</span>
+            </button>
+            <p class="welcome-demo-note">Showcase mode only · No Google account connection or password required</p>
+            <p class="welcome-signed-in" id="welcomeSignedIn" hidden>Signed in as <strong id="welcomeSignedInEmail"></strong></p>
             <button class="welcome-enter-btn" id="welcomeEnterBtn" type="button"
                 onclick="var gate=document.getElementById('welcomeGate'); if(gate){ gate.classList.add('welcome-flashing'); setTimeout(function(){ gate.classList.add('welcome-leaving'); document.body.classList.remove('welcome-active'); }, 620); setTimeout(function(){ gate.remove(); }, 1300); }">Enter platform</button>
+        </div>
+        <div class="demo-auth-modal" id="demoAuthModal" hidden>
+            <div class="demo-auth-backdrop" data-demo-auth-close></div>
+            <section class="demo-auth-card" role="dialog" aria-modal="true" aria-labelledby="demoAuthTitle">
+                <button class="demo-auth-close" id="demoAuthClose" type="button" aria-label="Close demo sign-in">&times;</button>
+                <div class="demo-auth-icon" aria-hidden="true">G</div>
+                <p class="welcome-kicker">Showcase sign-in</p>
+                <h2 id="demoAuthTitle">Continue with Google</h2>
+                <p class="demo-auth-copy">Enter a Gmail address to personalize this preview experience.</p>
+                <form id="demoAuthForm" novalidate>
+                    <label class="demo-auth-label" for="demoGmail">Gmail address</label>
+                    <input class="demo-auth-input" id="demoGmail" type="email" inputmode="email" autocomplete="email" placeholder="you@gmail.com" required>
+                    <p class="demo-auth-help">Demo only: this does not connect to Google, verify an account, or use a password.</p>
+                    <div class="demo-auth-status" id="demoAuthStatus" role="status" aria-live="polite"></div>
+                    <button class="demo-auth-submit" type="submit">Continue</button>
+                </form>
+            </section>
         </div>
         <div class="welcome-flash-light" aria-hidden="true"></div>
     </section>

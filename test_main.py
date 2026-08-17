@@ -17,6 +17,8 @@ def test_home_page():
     response = client.get("/")
     assert response.status_code == 200
     assert "HireFire AI" in response.text  # Ensure the platform identity is present
+    assert "Continue with Google" in response.text
+    assert "showcase mode" in response.text.lower()
 
 def test_resume_builder_page():
     """Test if the resume builder page loads successfully."""

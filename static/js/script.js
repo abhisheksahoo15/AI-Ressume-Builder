@@ -4,6 +4,36 @@ document.addEventListener("DOMContentLoaded", function () {
     const welcomeTypewriter = document.getElementById("welcomeTypewriter");
     const welcomeEnterBtn = document.getElementById("welcomeEnterBtn");
     const welcomeParticleField = document.getElementById("welcomeParticleField");
+    const welcomeGoogleBtn = document.getElementById("welcomeGoogleBtn");
+    const welcomeGoogleButtonText = document.getElementById("welcomeGoogleButtonText");
+    const welcomeSignedIn = document.getElementById("welcomeSignedIn");
+    const welcomeSignedInEmail = document.getElementById("welcomeSignedInEmail");
+    const demoAuthModal = document.getElementById("demoAuthModal");
+    const demoAuthClose = document.getElementById("demoAuthClose");
+    const demoAuthForm = document.getElementById("demoAuthForm");
+    const demoGmail = document.getElementById("demoGmail");
+    const demoAuthStatus = document.getElementById("demoAuthStatus");
+    const demoAuthStorageKey = "hirefire_demo_user";
+
+    const setDemoAuthStatus = (message, type = "") => {
+        if (!demoAuthStatus) return;
+        demoAuthStatus.textContent = message;
+        demoAuthStatus.className = `demo-auth-status${type ? ` ${type}` : ""}`;
+    };
+
+    const applyDemoUser = (email) => {
+        if (!email) return;
+        if (welcomeGoogleButtonText) welcomeGoogleButtonText.textContent = "Signed in with Google";
+        if (welcomeGoogleBtn) welcomeGoogleBtn.classList.add("is-signed-in");
+        if (welcomeSignedInEmail) welcomeSignedInEmail.textContent = email;
+        if (welcomeSignedIn) welcomeSignedIn.hidden = false;
+    };
+
+    const closeDemoAuth = () => {
+        if (!demoAuthModal) return;
+        demoAuthModal.hidden = true;
+        setDemoAuthStatus("");
+    };
 
     if (welcomeGate && welcomeTypewriter && welcomeEnterBtn) {
         document.body.classList.add("welcome-active");
@@ -70,8 +100,50 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         welcomeEnterBtn.addEventListener("click", landHome);
+
+        if (welcomeGoogleBtn && demoAuthModal && demoAuthForm && demoGmail) {
+            let savedDemoUser = "";
+            try {
+                savedDemoUser = window.localStorage.getItem(demoAuthStorageKey) || "";
+            } catch (error) {
+                savedDemoUser = "";
+            }
+            applyDemoUser(savedDemoUser);
+
+            welcomeGoogleBtn.addEventListener("click", () => {
+                demoAuthModal.hidden = false;
+                window.setTimeout(() => demoGmail.focus(), 0);
+            });
+
+            demoAuthForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const email = demoGmail.value.trim().toLowerCase();
+                if (!/^[^\s@]+@gmail\.com$/.test(email)) {
+                    setDemoAuthStatus("Please enter a valid Gmail address.", "error");
+                    demoGmail.focus();
+                    return;
+                }
+
+                try {
+                    window.localStorage.setItem(demoAuthStorageKey, email);
+                } catch (error) {
+                    // The showcase still works when browser storage is unavailable.
+                }
+                applyDemoUser(email);
+                closeDemoAuth();
+            });
+
+            if (demoAuthClose) demoAuthClose.addEventListener("click", closeDemoAuth);
+            demoAuthModal.querySelectorAll("[data-demo-auth-close]").forEach((element) => {
+                element.addEventListener("click", closeDemoAuth);
+            });
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && !demoAuthModal.hidden) closeDemoAuth();
+            });
+        }
+
         document.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
+            if ((event.key === "Enter" || event.key === " ") && (!demoAuthModal || demoAuthModal.hidden)) {
                 landHome();
             }
         });
